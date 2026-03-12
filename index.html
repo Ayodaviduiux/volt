@@ -1,11 +1,1045 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+<!-- saved from url=(0053)file:///C:/Users/Davedesign/Downloads/Untitled-1.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VOLT — Next-Gen Gadgets</title>
+<link href="./Untitled-1_files/css2" rel="stylesheet">
+<style>
+  :root {
+    --black: #0a0a0a;
+    --white: #f5f2ee;
+    --acid: #c8f53b;
+    --orange: #ff5c1a;
+    --muted: #1e1e1e;
+    --border: #2a2a2a;
+    --text-dim: #888;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* CUSTOM CURSOR */
+  .cursor {
+    width: 12px; height: 12px;
+    background: var(--acid);
+    border-radius: 50%;
+    position: fixed;
+    top: 0; left: 0;
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.15s ease, width 0.2s, height 0.2s;
+    transform: translate(-50%, -50%);
+  }
+  .cursor-ring {
+    width: 36px; height: 36px;
+    border: 1px solid rgba(200,245,59,0.4);
+    border-radius: 50%;
+    position: fixed;
+    top: 0; left: 0;
+    pointer-events: none;
+    z-index: 9998;
+    transform: translate(-50%, -50%);
+    transition: all 0.25s ease;
+  }
+  body:has(a:hover) .cursor, body:has(button:hover) .cursor {
+    width: 20px; height: 20px;
+    background: var(--orange);
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.4rem 3rem;
+    background: rgba(10,10,10,0.85);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem;
+    letter-spacing: 0.1em;
+    color: var(--white);
+    text-decoration: none;
+    display: flex; align-items: center; gap: 0.4rem;
+  }
+  .nav-logo span { color: var(--acid); }
+  .nav-links {
+    display: flex; gap: 2.5rem; list-style: none;
+  }
+  .nav-links a {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--acid); }
+  .nav-right {
+    display: flex; align-items: center; gap: 1.5rem;
+  }
+  .cart-btn {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    background: var(--acid);
+    color: var(--black);
+    border: none;
+    padding: 0.6rem 1.4rem;
+    cursor: none;
+    font-weight: 700;
+    transition: background 0.2s, transform 0.15s;
+    position: relative;
+  }
+  .cart-btn:hover { background: var(--orange); transform: translateY(-1px); }
+  .cart-count {
+    display: inline-flex; align-items: center; justify-content: center;
+    background: var(--black);
+    color: var(--acid);
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    font-size: 0.65rem;
+    margin-left: 0.4rem;
+  }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 0 3rem;
+    padding-top: 90px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 60% 80% at 70% 50%, rgba(200,245,59,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-left {
+    display: flex; flex-direction: column; justify-content: center;
+    padding-right: 4rem;
+    padding-bottom: 4rem;
+    animation: fadeUp 0.9s ease both;
+  }
+  .hero-tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--acid);
+    margin-bottom: 1.5rem;
+    display: flex; align-items: center; gap: 0.8rem;
+  }
+  .hero-tag::before {
+    content: '';
+    display: inline-block;
+    width: 30px; height: 1px;
+    background: var(--acid);
+  }
+  .hero-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(5rem, 9vw, 9rem);
+    line-height: 0.92;
+    letter-spacing: -0.01em;
+    margin-bottom: 2rem;
+  }
+  .hero-title em {
+    font-style: normal;
+    color: transparent;
+    -webkit-text-stroke: 1px var(--white);
+    opacity: 0.4;
+  }
+  .hero-desc {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--text-dim);
+    max-width: 400px;
+    margin-bottom: 2.5rem;
+  }
+  .hero-cta {
+    display: flex; gap: 1rem; align-items: center;
+  }
+  .btn-primary {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: var(--acid);
+    color: var(--black);
+    border: none;
+    padding: 1rem 2.2rem;
+    font-weight: 700;
+    cursor: none;
+    transition: all 0.2s;
+    text-decoration: none;
+    display: inline-block;
+  }
+  .btn-primary:hover { background: var(--orange); transform: translateY(-2px); }
+  .btn-ghost {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: transparent;
+    color: var(--white);
+    border: 1px solid var(--border);
+    padding: 1rem 2.2rem;
+    font-weight: 400;
+    cursor: none;
+    transition: all 0.2s;
+    text-decoration: none;
+    display: inline-block;
+  }
+  .btn-ghost:hover { border-color: var(--acid); color: var(--acid); }
+
+  .hero-right {
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+    animation: fadeUp 0.9s 0.2s ease both;
+  }
+  .hero-device {
+    width: 340px; height: 340px;
+    background: var(--muted);
+    border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 9rem;
+    position: relative;
+    animation: float 4s ease-in-out infinite;
+  }
+  .hero-device::after {
+    content: '';
+    position: absolute;
+    bottom: -30px; left: 10%; right: 10%;
+    height: 30px;
+    background: radial-gradient(ellipse, rgba(200,245,59,0.15) 0%, transparent 70%);
+    filter: blur(10px);
+  }
+  .hero-badge {
+    position: absolute;
+    top: 2rem; right: -1.5rem;
+    background: var(--orange);
+    color: var(--white);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1rem;
+    letter-spacing: 0.1em;
+    padding: 0.5rem 1rem;
+    transform: rotate(6deg);
+  }
+  .hero-stats {
+    position: absolute;
+    bottom: 3rem; left: -2rem;
+    background: var(--muted);
+    border: 1px solid var(--border);
+    padding: 1rem 1.5rem;
+  }
+  .hero-stats-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.2rem;
+    color: var(--acid);
+    line-height: 1;
+  }
+  .hero-stats-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-top: 0.2rem;
+  }
+
+  /* MARQUEE */
+  .marquee-wrap {
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    overflow: hidden;
+    padding: 1rem 0;
+    background: var(--muted);
+  }
+  .marquee-track {
+    display: flex; gap: 3rem;
+    animation: marquee 20s linear infinite;
+    white-space: nowrap;
+  }
+  .marquee-item {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1rem;
+    letter-spacing: 0.15em;
+    color: var(--text-dim);
+    display: flex; align-items: center; gap: 3rem;
+  }
+  .marquee-item span { color: var(--acid); }
+
+  /* SECTION SHARED */
+  section { padding: 6rem 3rem; }
+  .section-header {
+    display: flex; align-items: flex-end; justify-content: space-between;
+    margin-bottom: 3rem;
+  }
+  .section-tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--acid);
+    margin-bottom: 0.6rem;
+  }
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    line-height: 1;
+    letter-spacing: 0.02em;
+  }
+  .see-all {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    text-decoration: none;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 2px;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .see-all:hover { color: var(--acid); border-color: var(--acid); }
+
+  /* CATEGORIES */
+  .categories-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+  .category-card {
+    background: var(--black);
+    padding: 2.5rem 2rem;
+    display: flex; flex-direction: column; align-items: flex-start;
+    cursor: none;
+    transition: background 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .category-card::before {
+    content: '';
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--acid);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+  }
+  .category-card:hover { background: var(--muted); }
+  .category-card:hover::before { transform: scaleX(1); }
+  .cat-icon { font-size: 2.5rem; margin-bottom: 1.2rem; }
+  .cat-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.4rem;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.4rem;
+  }
+  .cat-count {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--text-dim);
+    letter-spacing: 0.1em;
+  }
+
+  /* PRODUCTS */
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+  .product-card {
+    background: var(--muted);
+    border: 1px solid var(--border);
+    cursor: none;
+    transition: transform 0.25s, border-color 0.25s;
+    position: relative;
+    overflow: hidden;
+    animation: fadeUp 0.6s ease both;
+  }
+  .product-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--acid);
+  }
+  .product-card:nth-child(2) { animation-delay: 0.1s; }
+  .product-card:nth-child(3) { animation-delay: 0.2s; }
+  .product-card:nth-child(4) { animation-delay: 0.15s; }
+  .product-card:nth-child(5) { animation-delay: 0.25s; }
+  .product-card:nth-child(6) { animation-delay: 0.3s; }
+
+  .product-badge {
+    position: absolute; top: 1rem; left: 1rem;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.7rem;
+    font-weight: 700;
+    z-index: 2;
+  }
+  .badge-new { background: var(--acid); color: var(--black); }
+  .badge-sale { background: var(--orange); color: var(--white); }
+  .badge-hot { background: #ff2d55; color: var(--white); }
+
+  .product-img {
+    height: 220px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 6rem;
+    background: #141414;
+    position: relative;
+    transition: transform 0.3s ease;
+  }
+  .product-card:hover .product-img { transform: scale(1.04); }
+
+  .product-info { padding: 1.5rem; }
+  .product-category {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.63rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-bottom: 0.5rem;
+  }
+  .product-name {
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.4;
+    margin-bottom: 0.8rem;
+    color: var(--white);
+  }
+  .product-bottom {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-top: 1rem;
+  }
+  .product-price {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.6rem;
+    letter-spacing: 0.05em;
+    color: var(--acid);
+  }
+  .product-price-old {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    text-decoration: line-through;
+    margin-left: 0.5rem;
+  }
+  .add-btn {
+    width: 40px; height: 40px;
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--white);
+    font-size: 1.2rem;
+    display: flex; align-items: center; justify-content: center;
+    cursor: none;
+    transition: all 0.2s;
+  }
+  .add-btn:hover { background: var(--acid); border-color: var(--acid); color: var(--black); }
+  .product-rating {
+    display: flex; gap: 2px; margin-top: 0.5rem;
+  }
+  .star { color: var(--acid); font-size: 0.75rem; }
+  .star.empty { color: var(--border); }
+
+  /* FEATURED BANNER */
+  .featured-banner {
+    margin: 0 3rem;
+    background: var(--acid);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    overflow: hidden;
+    position: relative;
+  }
+  .fb-left {
+    padding: 4rem;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .fb-tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(0,0,0,0.5);
+    margin-bottom: 1rem;
+  }
+  .fb-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.5rem, 4vw, 4rem);
+    line-height: 0.95;
+    color: var(--black);
+    margin-bottom: 1.5rem;
+  }
+  .fb-desc {
+    font-size: 0.95rem;
+    color: rgba(0,0,0,0.65);
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    max-width: 360px;
+  }
+  .btn-dark {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: var(--black);
+    color: var(--acid);
+    border: none;
+    padding: 1rem 2rem;
+    font-weight: 700;
+    cursor: none;
+    transition: all 0.2s;
+    text-decoration: none;
+    display: inline-block;
+    width: fit-content;
+  }
+  .btn-dark:hover { background: #1a1a1a; transform: translateY(-2px); }
+  .fb-right {
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12rem;
+    background: rgba(0,0,0,0.06);
+    position: relative;
+  }
+  .fb-price-tag {
+    position: absolute;
+    bottom: 2rem; right: 2rem;
+    background: var(--black);
+    color: var(--acid);
+    padding: 1rem 1.5rem;
+  }
+  .fb-price-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-dim);
+    margin-bottom: 0.2rem;
+  }
+  .fb-price-value {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem;
+    letter-spacing: 0.05em;
+  }
+
+  /* NEWSLETTER */
+  .newsletter {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 6rem 2rem;
+  }
+  .newsletter .section-tag { justify-content: center; text-align: center; }
+  .newsletter .section-title { text-align: center; margin-bottom: 1rem; }
+  .newsletter p {
+    color: var(--text-dim);
+    line-height: 1.7;
+    margin-bottom: 2.5rem;
+  }
+  .newsletter-form {
+    display: flex; gap: 0;
+    border: 1px solid var(--border);
+  }
+  .newsletter-form input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    padding: 1rem 1.5rem;
+  }
+  .newsletter-form input::placeholder { color: var(--text-dim); }
+  .newsletter-form button {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: var(--acid);
+    color: var(--black);
+    border: none;
+    padding: 0 2rem;
+    font-weight: 700;
+    cursor: none;
+    white-space: nowrap;
+    transition: background 0.2s;
+  }
+  .newsletter-form button:hover { background: var(--orange); color: var(--white); }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 4rem 3rem 2rem;
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 3rem;
+    margin-bottom: 3rem;
+  }
+  .footer-brand .nav-logo { font-size: 2.2rem; margin-bottom: 1rem; display: block; }
+  .footer-brand p {
+    font-size: 0.9rem;
+    color: var(--text-dim);
+    line-height: 1.7;
+    max-width: 280px;
+  }
+  .footer-col h4 {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--white);
+    margin-bottom: 1.5rem;
+  }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.8rem; }
+  .footer-col a {
+    font-size: 0.9rem;
+    color: var(--text-dim);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-col a:hover { color: var(--acid); }
+  .footer-bottom {
+    border-top: 1px solid var(--border);
+    padding-top: 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .footer-bottom p {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--text-dim);
+    letter-spacing: 0.08em;
+  }
+
+  /* TOAST */
+  .toast {
+    position: fixed;
+    bottom: 2rem; right: 2rem;
+    background: var(--acid);
+    color: var(--black);
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    padding: 1rem 1.5rem;
+    z-index: 1000;
+    transform: translateY(100px);
+    opacity: 0;
+    transition: all 0.3s ease;
+  }
+  .toast.show { transform: translateY(0); opacity: 1; }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-18px); }
+  }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* SCROLLBAR */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--black); }
+  ::-webkit-scrollbar-thumb { background: var(--border); }
+  ::-webkit-scrollbar-thumb:hover { background: var(--acid); }
+</style>
 </head>
 <body>
+
+<div class="cursor" id="cursor" style="left: 880px; top: 139px;"></div>
+<div class="cursor-ring" id="cursorRing" style="left: 880px; top: 139px;"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="file:///C:/Users/Davedesign/Downloads/Untitled-1.html#" class="nav-logo">VOLT<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="file:///C:/Users/Davedesign/Downloads/Untitled-1.html#products">Shop</a></li>
+    <li><a href="file:///C:/Users/Davedesign/Downloads/Untitled-1.html#categories">Categories</a></li>
+    <li><a href="file:///C:/Users/Davedesign/Downloads/Untitled-1.html#featured">Deals</a></li>
+    <li><a href="file:///C:/Users/Davedesign/Downloads/Untitled-1.html#">About</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="cart-btn" onclick="toggleCart()">
+      Cart <span class="cart-count" id="cartCount">0</span>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-tag">New Drop 2026</div>
+    <h1 class="hero-title">Future<br>Is <em>Now</em><br>Live It.</h1>
+    <p class="hero-desc">Cutting-edge gadgets engineered for tomorrow. From AI-powered earbuds to next-gen wearables — upgrade your world.</p>
+    <div class="hero-cta">
+      <a href="file:///C:/Users/Davedesign/Downloads/Untitled-1.html#products" class="btn-primary">Shop Now</a>
+      <a href="file:///C:/Users/Davedesign/Downloads/Untitled-1.html#featured" class="btn-ghost">View Deals</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-device">
+      🎧
+      <div class="hero-badge">SOLD OUT</div>
+      <div class="hero-stats">
+        <div class="hero-stats-num">4.8★</div>
+        <div class="hero-stats-label">Customer Rating</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <div class="marquee-item">Free Shipping Over $99 <span>✦</span></div>
+    <div class="marquee-item">New Arrivals Every Week <span>✦</span></div>
+    <div class="marquee-item">2-Year Warranty <span>✦</span></div>
+    <div class="marquee-item">30-Day Returns <span>✦</span></div>
+    <div class="marquee-item">Certified Authentic <span>✦</span></div>
+    <div class="marquee-item">Free Shipping Over $99 <span>✦</span></div>
+    <div class="marquee-item">New Arrivals Every Week <span>✦</span></div>
+    <div class="marquee-item">2-Year Warranty <span>✦</span></div>
+    <div class="marquee-item">30-Day Returns <span>✦</span></div>
+    <div class="marquee-item">Certified Authentic <span>✦</span></div>
+  </div>
+</div>
+
+<!-- CATEGORIES -->
+<section id="categories">
+  <div class="section-header">
+    <div>
+      <div class="section-tag">Browse by type</div>
+      <h2 class="section-title">Categories</h2>
+    </div>
+    <a href="file:///C:/Users/Davedesign/Downloads/Untitled-1.html#" class="see-all">View All →</a>
+  </div>
+  <div class="categories-grid">
+    <div class="category-card">
+      <div class="cat-icon">🎧</div>
+      <div class="cat-name">Audio</div>
+      <div class="cat-count">48 products</div>
+    </div>
+    <div class="category-card">
+      <div class="cat-icon">⌚</div>
+      <div class="cat-name">Wearables</div>
+      <div class="cat-count">31 products</div>
+    </div>
+    <div class="category-card">
+      <div class="cat-icon">📸</div>
+      <div class="cat-name">Cameras</div>
+      <div class="cat-count">22 products</div>
+    </div>
+    <div class="category-card">
+      <div class="cat-icon">🎮</div>
+      <div class="cat-name">Gaming</div>
+      <div class="cat-count">57 products</div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section id="products">
+  <div class="section-header">
+    <div>
+      <div class="section-tag">Hand-picked for you</div>
+      <h2 class="section-title">Featured Gear</h2>
+    </div>
+    <a href="file:///C:/Users/Davedesign/Downloads/Untitled-1.html#" class="see-all">View All →</a>
+  </div>
+  <div class="products-grid" id="productGrid">
+      <div class="product-card">
+        <div class="product-badge badge-new">new</div>
+        <div class="product-img">🎧</div>
+        <div class="product-info">
+          <div class="product-category">Audio</div>
+          <div class="product-name">Apple AirPods Pro 3</div>
+          <div class="product-rating">
+            <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+          </div>
+          <div class="product-bottom">
+            <div>
+              <span class="product-price">$249</span>
+              <span class="product-price-old">$279</span>
+            </div>
+            <button class="add-btn" onclick="addToCart(&#39;Apple AirPods Pro 3&#39;)">+</button>
+          </div>
+        </div>
+      </div>
     
-</body>
-</html>
+      <div class="product-card">
+        <div class="product-badge badge-sale">sale</div>
+        <div class="product-img">⌚</div>
+        <div class="product-info">
+          <div class="product-category">Wearables</div>
+          <div class="product-name">Samsung Galaxy Watch 7 Ultra</div>
+          <div class="product-rating">
+            <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star empty">★</span>
+          </div>
+          <div class="product-bottom">
+            <div>
+              <span class="product-price">$449</span>
+              <span class="product-price-old">$499</span>
+            </div>
+            <button class="add-btn" onclick="addToCart(&#39;Samsung Galaxy Watch 7 Ultra&#39;)">+</button>
+          </div>
+        </div>
+      </div>
+    
+      <div class="product-card">
+        <div class="product-badge badge-hot">hot</div>
+        <div class="product-img">📸</div>
+        <div class="product-info">
+          <div class="product-category">Cameras</div>
+          <div class="product-name">DJI Osmo Pocket 3</div>
+          <div class="product-rating">
+            <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+          </div>
+          <div class="product-bottom">
+            <div>
+              <span class="product-price">$319</span>
+              
+            </div>
+            <button class="add-btn" onclick="addToCart(&#39;DJI Osmo Pocket 3&#39;)">+</button>
+          </div>
+        </div>
+      </div>
+    
+      <div class="product-card">
+        <div class="product-badge badge-sale">sale</div>
+        <div class="product-img">🎮</div>
+        <div class="product-info">
+          <div class="product-category">Gaming</div>
+          <div class="product-name">SteelSeries Arctis Nova Pro</div>
+          <div class="product-rating">
+            <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star empty">★</span>
+          </div>
+          <div class="product-bottom">
+            <div>
+              <span class="product-price">$189</span>
+              <span class="product-price-old">$219</span>
+            </div>
+            <button class="add-btn" onclick="addToCart(&#39;SteelSeries Arctis Nova Pro&#39;)">+</button>
+          </div>
+        </div>
+      </div>
+    
+      <div class="product-card">
+        <div class="product-badge badge-new">new</div>
+        <div class="product-img">📖</div>
+        <div class="product-info">
+          <div class="product-category">E-Readers</div>
+          <div class="product-name">Kindle Scribe Premium</div>
+          <div class="product-rating">
+            <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star empty">★</span>
+          </div>
+          <div class="product-bottom">
+            <div>
+              <span class="product-price">$369</span>
+              
+            </div>
+            <button class="add-btn" onclick="addToCart(&#39;Kindle Scribe Premium&#39;)">+</button>
+          </div>
+        </div>
+      </div>
+    
+      <div class="product-card">
+        <div class="product-badge badge-sale">sale</div>
+        <div class="product-img">🔋</div>
+        <div class="product-info">
+          <div class="product-category">Charging</div>
+          <div class="product-name">Anker 3-in-1 Wireless Station</div>
+          <div class="product-rating">
+            <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+          </div>
+          <div class="product-bottom">
+            <div>
+              <span class="product-price">$129</span>
+              <span class="product-price-old">$159</span>
+            </div>
+            <button class="add-btn" onclick="addToCart(&#39;Anker 3-in-1 Wireless Station&#39;)">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+</section>
+
+<!-- FEATURED BANNER -->
+<div class="featured-banner" id="featured">
+  <div class="fb-left">
+    <div class="fb-tag">Deal of the Week</div>
+    <h2 class="fb-title">Sony WH-1000XM6<br>ANC Headphones</h2>
+    <p class="fb-desc">Industry-leading noise cancellation meets 40-hour battery life. The benchmark for wireless audio, now at an unmissable price.</p>
+    <a href="file:///C:/Users/Davedesign/Downloads/Untitled-1.html#" class="btn-dark" onclick="addToCartFromBanner()">Add to Cart — $279</a>
+  </div>
+  <div class="fb-right">
+    🎧
+    <div class="fb-price-tag">
+      <div class="fb-price-label">Was $349</div>
+      <div class="fb-price-value">$279</div>
+    </div>
+  </div>
+</div>
+
+<!-- NEWSLETTER -->
+<div class="newsletter">
+  <div class="section-tag">Stay in the loop</div>
+  <h2 class="section-title">Drop Alerts</h2>
+  <p>Be the first to know about new releases, flash sales, and exclusive deals. No spam — only the good stuff.</p>
+  <div class="newsletter-form">
+    <input type="email" placeholder="your@email.com" id="emailInput">
+    <button onclick="subscribeNewsletter()">Subscribe</button>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="file:///C:/Users/Davedesign/Downloads/Untitled-1.html#" class="nav-logo">VOLT<span style="color:var(--acid)">.</span></a>
+      <p>Premium gadgets for the technically adventurous. Sourced globally, delivered fast, backed by real support.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Shop</h4>
+      <ul>
+        <li><a href="file:///C:/Users/Davedesign/Downloads/Untitled-1.html#">New Arrivals</a></li>
+        <li><a href="file:///C:/Users/Davedesign/Downloads/Untitled-1.html#">Best Sellers</a></li>
+        <li><a href="file:///C:/Users/Davedesign/Downloads/Untitled-1.html#">On Sale</a></li>
+        <li><a href="file:///C:/Users/Davedesign/Downloads/Untitled-1.html#">Bundles</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Support</h4>
+      <ul>
+        <li><a href="file:///C:/Users/Davedesign/Downloads/Untitled-1.html#">FAQ</a></li>
+        <li><a href="file:///C:/Users/Davedesign/Downloads/Untitled-1.html#">Shipping</a></li>
+        <li><a href="file:///C:/Users/Davedesign/Downloads/Untitled-1.html#">Returns</a></li>
+        <li><a href="file:///C:/Users/Davedesign/Downloads/Untitled-1.html#">Warranty</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="file:///C:/Users/Davedesign/Downloads/Untitled-1.html#">About Us</a></li>
+        <li><a href="file:///C:/Users/Davedesign/Downloads/Untitled-1.html#">Blog</a></li>
+        <li><a href="file:///C:/Users/Davedesign/Downloads/Untitled-1.html#">Careers</a></li>
+        <li><a href="file:///C:/Users/Davedesign/Downloads/Untitled-1.html#">Press</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 VOLT. All rights reserved.</p>
+    <p>Privacy Policy · Terms of Service · Cookies</p>
+  </div>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  // CURSOR
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  document.addEventListener('mousemove', e => {
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top = e.clientY + 'px';
+    setTimeout(() => {
+      ring.style.left = e.clientX + 'px';
+      ring.style.top = e.clientY + 'px';
+    }, 60);
+  });
+
+  // PRODUCTS DATA
+  const products = [
+    { id:1, name:"Apple AirPods Pro 3", category:"Audio", price:249, oldPrice:279, emoji:"🎧", badge:"new", stars:5 },
+    { id:2, name:"Samsung Galaxy Watch 7 Ultra", category:"Wearables", price:449, oldPrice:499, emoji:"⌚", badge:"sale", stars:4 },
+    { id:3, name:"DJI Osmo Pocket 3", category:"Cameras", price:319, oldPrice:null, emoji:"📸", badge:"hot", stars:5 },
+    { id:4, name:"SteelSeries Arctis Nova Pro", category:"Gaming", price:189, oldPrice:219, emoji:"🎮", badge:"sale", stars:4 },
+    { id:5, name:"Kindle Scribe Premium", category:"E-Readers", price:369, oldPrice:null, emoji:"📖", badge:"new", stars:4 },
+    { id:6, name:"Anker 3-in-1 Wireless Station", category:"Charging", price:129, oldPrice:159, emoji:"🔋", badge:"sale", stars:5 },
+  ];
+
+  let cart = 0;
+
+  function renderProducts() {
+    const grid = document.getElementById('productGrid');
+    grid.innerHTML = products.map(p => `
+      <div class="product-card">
+        ${p.badge ? `<div class="product-badge badge-${p.badge}">${p.badge}</div>` : ''}
+        <div class="product-img">${p.emoji}</div>
+        <div class="product-info">
+          <div class="product-category">${p.category}</div>
+          <div class="product-name">${p.name}</div>
+          <div class="product-rating">
+            ${[1,2,3,4,5].map(s => `<span class="star${s > p.stars ? ' empty' : ''}">★</span>`).join('')}
+          </div>
+          <div class="product-bottom">
+            <div>
+              <span class="product-price">$${p.price}</span>
+              ${p.oldPrice ? `<span class="product-price-old">$${p.oldPrice}</span>` : ''}
+            </div>
+            <button class="add-btn" onclick="addToCart('${p.name}')">+</button>
+          </div>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  function addToCart(name) {
+    cart++;
+    document.getElementById('cartCount').textContent = cart;
+    showToast(`${name} added to cart`);
+  }
+
+  function addToCartFromBanner() {
+    addToCart('Sony WH-1000XM6');
+  }
+
+  function toggleCart() {
+    showToast(cart === 0 ? 'Your cart is empty' : `${cart} item${cart > 1 ? 's' : ''} in cart`);
+  }
+
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2800);
+  }
+
+  function subscribeNewsletter() {
+    const input = document.getElementById('emailInput');
+    if (input.value && input.value.includes('@')) {
+      showToast('You\'re subscribed! 🎉');
+      input.value = '';
+    } else {
+      showToast('Enter a valid email address');
+    }
+  }
+
+  renderProducts();
+</script>
+
+</body></html>
