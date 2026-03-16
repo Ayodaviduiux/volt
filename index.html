@@ -639,6 +639,84 @@
       ::-webkit-scrollbar { width: 4px; }
       ::-webkit-scrollbar-track { background: var(--black); }
       ::-webkit-scrollbar-thumb { background: var(--border); }
+      /* --- RESPONSIVE BREAKPOINTS --- */
+
+/* TABLET VIEW (e.g., iPads) */
+@media (max-width: 1024px) {
+  .hero {
+    grid-template-columns: 1fr; /* Stack hero content vertically */
+    padding: 120px 2rem 4rem;
+    text-align: center;
+  }
+  
+  .hero-left {
+    padding-right: 0;
+    align-items: center;
+  }
+  
+  .hero-desc {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero-cta {
+    justify-content: center;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr 1fr; /* 2x2 grid for footer */
+  }
+}
+
+/* MOBILE VIEW (e.g., iPhones, Pixels) */
+@media (max-width: 768px) {
+  nav {
+    padding: 1rem 1.5rem;
+  }
+
+  .nav-links {
+    display: none; /* Hide links on mobile (usually replaced by a burger menu) */
+  }
+
+  .hero-title {
+    font-size: clamp(3.5rem, 12vw, 5rem);
+  }
+
+  section {
+    padding: 4rem 1.5rem;
+  }
+
+  .categories-grid {
+    grid-template-columns: 1fr 1fr; /* 2 columns instead of 4 */
+  }
+
+  .featured-banner {
+    margin: 0 1rem;
+    grid-template-columns: 1fr;
+  }
+
+  .fb-right {
+    min-height: 200px;
+    font-size: 8rem;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr; /* Single column footer */
+    text-align: center;
+  }
+
+  .footer-brand p {
+    margin: 0 auto;
+  }
+
+  /* Disable custom cursor on mobile as it interferes with touch */
+  .cursor, .cursor-ring {
+    display: none;
+  }
+  body {
+    cursor: auto;
+  }
+}
     </style>
 </head>
 <body>
